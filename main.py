@@ -8,6 +8,7 @@ fake_data = Faker("ru_RU")
 
 
 def generate_title() -> str:
+    """Chooses a random book title from a text file"""
     books = []
     with open("books.txt", encoding="utf-8") as f:
         for title in f.readlines():
@@ -16,26 +17,32 @@ def generate_title() -> str:
 
 
 def generate_year() -> int:
+    """Creates a random year"""
     return random.randint(1600, 2022)
 
 
 def generate_pages() -> int:
+    """Creates a random number of pages"""
     return random.randint(16, 3000)
 
 
 def generate_isbn13() -> str:
+    """Generates a random isbn13 number with Faker"""
     return fake_data.isbn13()
 
 
 def generate_rating() -> float:
+    """Generates a random rating"""
     return round(random.uniform(0, 5), 2)
 
 
 def generate_price() -> float:
+    """Generates a random price"""
     return round(random.uniform(200, 6000), 2)
 
 
 def generate_author() -> list:
+    """Returns a list with 1-3 author names using Faker"""
     authors = []
     for _ in range(random.randint(1, 3)):
         authors.append(fake_data.name())
@@ -43,6 +50,7 @@ def generate_author() -> list:
 
 
 def generate_book(count_:int = 1) -> dict:
+    """Generates fake book information while keeping track of how many times this function's been called"""
     while True:
         book = {
             "model": MODEL,
@@ -62,6 +70,7 @@ def generate_book(count_:int = 1) -> dict:
 
 
 def generate_books(number_of_books: int, pk: int = 1) -> list:
+    """Returns a list of fake books"""
     books = []
     gen_b = generate_book(pk)
     for i in range(number_of_books):
